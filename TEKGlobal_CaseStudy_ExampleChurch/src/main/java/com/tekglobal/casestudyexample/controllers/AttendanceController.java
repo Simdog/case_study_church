@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tekglobal.casestudyexample.models.Attendance;
 import com.tekglobal.casestudyexample.models.ChurchMember;
+import com.tekglobal.casestudyexample.models.UserInfo;
 import com.tekglobal.casestudyexample.services.AttendanceService;
 import com.tekglobal.casestudyexample.services.ChurchMemberService;
 
@@ -171,12 +173,40 @@ public class AttendanceController {
 //	
 //}
 	
+	List<ChurchMember> members = new ArrayList<ChurchMember>();
 	
 	@RequestMapping(value = "/updateattendance", method = RequestMethod.POST)
-	public ModelAndView updateNewAttendance(@ModelAttribute("attendance")Attendance attendance, HttpServletRequest request,  Model model) throws ParseException {
-//		List<ChurchMember> members = attendance.getMember();
-		return null;
+	public String updateNewAttendance(HttpServletRequest request) throws ParseException {
+		String[] memberIds = request.getParameterValues("churchMemberId");
+		String[] memberAttendance =request.getParameterValues("churchMemberAttendance");
+		String[] attendanceDate = request.getParameterValues("attendanceDate");
+
+		int L1 = memberIds.length;
+		Long[] newId = new Long[L1];
+		for (int i = 0; i < memberIds.length; i++) {
+			newId[i] = Long.parseLong(memberIds[i]);
+			Attendance attendance = new Attendance();
+			String selected = request.getParameter("churchMemberAttendance" + memberIds[i]);
+
+//			ChurchMember mem[] = new ChurchMember[memberIds.length];
+//			mem[i].getId();
+			ChurchMember memId = churchMemberService.get(Long.parseLong(memberIds[i]));
+			attendance.setMember(memId);
+			attendance.setDate(attendanceDate[i]);
+			boolean newB = false;
+//			System.out.println(memberAttendance[i]);
+			if (selected.equals("1")) {
+				 newB = true;
+			} 
+			attendance.setIsPresent(newB);
+
+
+			attendanceService.save(attendance);
+			
+			
+		}
 		
+		return "redirect:/attendance";
 	}
 		
 	
