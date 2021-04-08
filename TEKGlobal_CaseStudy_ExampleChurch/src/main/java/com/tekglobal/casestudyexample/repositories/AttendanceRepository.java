@@ -12,6 +12,5 @@ public interface AttendanceRepository  extends CrudRepository<Attendance, Boolea
 	
 	Attendance findById(String id);
 
-//	public Attendance save();
 
 }

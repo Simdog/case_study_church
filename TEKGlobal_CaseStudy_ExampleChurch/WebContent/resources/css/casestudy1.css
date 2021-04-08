@@ -11,21 +11,14 @@
 	
 }
 
-.wrapper{
-	display: flex;
+
+.main-content{
 	position: relative;
+	min-height: 100vh;
+
+	}
+.content-wrap{
+	padding-bottom: 2.5rem;
 }
 
-.wrapper .sidebar{
-	position: fixed;
-	width: 200px;
-	height: 100px;
-}
 
-h1{
-	color: red;
-}
-
-body{
-	background: red;
-}

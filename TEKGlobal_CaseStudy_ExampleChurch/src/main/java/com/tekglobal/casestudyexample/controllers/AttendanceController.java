@@ -51,7 +51,8 @@ public class AttendanceController {
 	public String getNewAttendance(ModelMap modelMap, Model model) {
 		model.addAttribute("attendance", new Attendance());
 		List<ChurchMember> listChurchMember = churchMemberService.listAll();
-		modelMap.put("listChurchMember", listChurchMember);
+		model.addAttribute("listChurchMember",listChurchMember);
+//		modelMap.put("listChurchMember", listChurchMember);
 		return "attendance";
 	
 }
@@ -61,39 +62,124 @@ public class AttendanceController {
 	//https://www.viralpatel.net/spring-mvc-multi-row-submit-java-list/
 	//https://www.youtube.com/watch?v=P6VnaykpXpg
 //	
-	@RequestMapping(value = "/updateattendance", method = RequestMethod.POST)
-	public String updateNewTithe(HttpServletRequest request) throws ParseException {
-		String[] memberIds = request.getParameterValues("churchMemberId");
-		String[] memberAttendance =request.getParameterValues("churchMemberAttendance");
-		String[] attendanceDate = request.getParameterValues("attendanceDate");
-//		SimpleDateFormat availDate = new SimpleDateFormat("dd-MM-yyyy");
-
-		int L1 = memberIds.length;
-		Boolean[] newBool = new Boolean[L1];
-		Long[] newId = new Long[L1];
-
-		for (int i = 0; i < memberIds.length; i++) {
-			
-			String isPresent = request.getParameter("status_"+i);
-			
-			
-			newId[i] = Long.parseLong(memberIds[i]);
-			Attendance attendance = new Attendance();
-//			Boolean setBool = false;
-			attendance.setId(newId[i]);
-			attendance.setDate(attendanceDate[i]);
-			
-			newBool[i] = Boolean.getBoolean(memberAttendance[i]);
-			attendance.setIsPresent(newBool[i]);
+//	@RequestMapping(value = "/updateattendance", method = RequestMethod.POST)
+//	public String updateNewTithe(HttpServletRequest request, Attendance attendance) throws ParseException {
+//		String[] memberIds = request.getParameterValues("churchMemberId");
+//		String[] memberAttendance =request.getParameterValues("churchMemberAttendance");
+//		String[] attendanceDate = request.getParameterValues("attendanceDate");
+////		SimpleDateFormat availDate = new SimpleDateFormat("dd-MM-yyyy");
+//	
+//		int L1 = memberIds.length;
+//		Boolean[] newBool = new Boolean[L1];
+////		System.out.println(memberAttendance.length);
+//		Long[] newId = new Long[L1];
+////		Attendance attendance = new Attendance();
+//
+//		for (int i = 0; i < memberIds.length; i++) {
+//			String selected = request.getParameter("churchMemberAttendance" + memberIds[i]);
+//			
+////			newBool[i] = Boolean.parseBoolean(memberAttendance[i]);
+//
+////			boolean checkBool = request.getParameter("churchMemberAttendance" + memberIds) !=null;
+////			System.out.println(checkBool);
+//			
+//			
+//			boolean newB = false;
+//			
+//			if (selected.equals("1")) {
+//				 newB = true;
+//			} 
+//			
+//			System.out.println(newB);
+//			
+//			newId[i] = Long.parseLong(memberIds[i]);
+////			Attendance attendance = new Attendance();
+////			if (memberAttendance[i] != null) {
+//////				System.out.println(memberAttendance[i]);
+////				
+////			} else {
+////				i++;
+////				
+////				memberAttendance[i] = "false";
+////				System.out.println("false");
+////				continue;
+////			}
+//			
+//			attendance.setId(newId[i]);
 //			attendance.setDate(attendanceDate[i]);
-			
-			attendanceService.save(attendance);
-		}
+//			
+//			attendance.setIsPresent(newB);
+////			attendance.setDate(attendanceDate[i]);
+//			
+//			attendanceService.save(attendance);
+//		}
+//		
+//		return "attendance";
+//	
+//	
+//}
+	
+	
+//	@RequestMapping(value = "/updateattendance", method = RequestMethod.POST)
+//	public ModelAndView updateNewTithe(HttpServletRequest request, Attendance attendance, Model model) throws ParseException {
+//		String[] memberIds = request.getParameterValues("churchMemberId");
+//		String[] memberAttendance =request.getParameterValues("churchMemberAttendance");
+//		String[] attendanceDate = request.getParameterValues("attendanceDate");
+//	
+//		int L1 = memberIds.length;
+//		Boolean[] newBool = new Boolean[L1];
+//		Long[] newId = new Long[L1];
+//		
+//		List<ChurchMember> members = churchMemberService.listAll();
+//		ModelAndView mv = new ModelAndView("attendance");
+//		model.addAttribute("listChurchMember", members);
+//
+//		
+//		for (int i = 0; i < memberIds.length; i++) {
+//			String selected = request.getParameter("churchMemberAttendance" + memberIds[i]);
+//
+//			ChurchMember memId = churchMemberService.get(Long.parseLong(memberIds[i]));
+//
+//			boolean newB = false;
+//			
+//			if (selected.equals("1")) {
+//				 newB = true;
+//			} 
+//			
+//			System.out.println(newB);
+//			
+//			newId[i] = Long.parseLong(memberIds[i]);
+//			
+//			
+//			attendance.setMember(memId);
+////			attendance.setId(newId[i]);
+//			attendance.setDate(attendanceDate[i]);
+//			
+//			attendance.setIsPresent(newB);
+//			
+//			attendanceService.save(attendance);
+//			mv.addObject("attendance", attendance);
+//		}
+////		attendanceService.save(attendance);
+////
+////		mv.addObject("attendance", attendance);
+//
+//		
+//		
+//		return mv;
+//	
+//	
+//}
+	
+	
+	@RequestMapping(value = "/updateattendance", method = RequestMethod.POST)
+	public ModelAndView updateNewAttendance(@ModelAttribute("attendance")Attendance attendance, HttpServletRequest request,  Model model) throws ParseException {
+//		List<ChurchMember> members = attendance.getMember();
+		return null;
 		
-		return "attendance";
+	}
+		
 	
 	
 }
-	
-	
-}
+

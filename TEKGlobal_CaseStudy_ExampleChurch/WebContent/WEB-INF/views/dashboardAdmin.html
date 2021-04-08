@@ -3,11 +3,68 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<script src="https://kit.fontawesome.com/39f198be01.js" crossorigin="anonymous"></script>
+<style type="text/css">
+
+.wrapper{
+	display: flex;
+	position: relative;
+}
+
+.wrapper .sidebar{
+	position: fixed;
+	width: 200px;
+	height: 100%;
+	background: #2b2d2f;
+	padding: 30px 0;
+}
+
+.wrapper .sidebar h2{
+	color: #fff;
+	text-transform: uppercase;
+	text-align: center;
+	margin-bottom: 30px;
+	
+ }
+
+.wrapper .sidebar ul li{ 
+	padding: 15px;
+	border-bottom: 1px solid rgba(0,0,0,0.05);
+	border-top: 1px solid rgba(225,225,225,0.05)
+}
+
+.wrapper .sidebar ul li a{
+	color: #bdb8d7;
+	display: block; 
+}
+
+.wrapper .sidebar ul li a .fas{
+	width: 25px;
+ }
+
+.wrapper .sidebar ul li:hover{ 
+	background: #4d4e4f;
+}
+
+.wrapper .sidebar ul li:hover a{ 
+	color: #fff;
+}
+
+.wrapper .main_content{ 
+	width: 100%;
+	margin-left: 200px;
+} 
+
+
+
+
+
+
+</style>
+	<script src="https://kit.fontawesome.com/39f198be01.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="wrapper">
-	<div class="sidebar"></div>
+	<div class="sidebar"> 
 		<h2>Admin Sidebar</h2>
 		<ul>
 			<li><a href="./"><i class="fas fa-home"></i>Home</a></li>
@@ -20,11 +77,7 @@
 
 		</ul>
 </div>
-<div class="main_content">
-	<div class="header">Welcome!! Have a nice day</div>
-	<div class="info">
-		<div>lorem lorem</div>
-	</div>
 </div>
+
 </body>
 </html>

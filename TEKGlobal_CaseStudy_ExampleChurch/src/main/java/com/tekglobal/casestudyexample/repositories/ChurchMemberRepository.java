@@ -15,8 +15,7 @@ public interface ChurchMemberRepository extends CrudRepository<ChurchMember, Lon
 	public List<ChurchMember> search(@Param("keyword") String keyword);
 	
 
-//	@Query("select c from ChurchMember c join fetch c.userInfo")
-//	public Iterable<ChurchMember> findAll();
+
 	
 	
 

@@ -64,13 +64,7 @@ public class Tithe {
 //		this.dateCollected = dateCollected;
 	}
 
-//	public Long getUserId() {
-//		return userId;
-//	}
 
-//	public void setUserId(Long userId) {
-//		this.userId = userId;
-//	}
 
 	public String getTitheAmount() {
 		return titheAmount;
@@ -80,13 +74,6 @@ public class Tithe {
 		this.titheAmount = titheAmount;
 	}
 
-//	public Date getDateCollected() {
-//		return dateCollected;
-//	}
-//
-//	public void setDateCollected(Date dateCollected) {
-//		this.dateCollected = dateCollected;
-//	}
 
 	public ChurchMember getMember() {
 		return member;

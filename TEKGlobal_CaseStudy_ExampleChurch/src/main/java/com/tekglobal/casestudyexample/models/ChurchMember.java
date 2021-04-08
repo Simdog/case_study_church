@@ -57,7 +57,7 @@ public class ChurchMember {
 //	private Set<Tithe> tithe;
 	
 	@OneToMany(targetEntity=Attendance.class, cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "member")
-	private Set<Attendance> attendance;
+	private Set<Attendance> attendance = new HashSet<>();
 	
 	
 	private ChurchRoles userRole;
@@ -109,6 +109,23 @@ public class ChurchMember {
 	public void removeTithe (Tithe tithe) {
 		this.tithe.remove(tithe);
 		tithe.setMember(null);
+	}
+	
+	public void addAttendance (Attendance attendance) {
+		if (attendance != null) {
+			if (this.attendance == null) {
+				this.attendance = new HashSet<Attendance>();
+			}
+				this.attendance.add(attendance);
+				attendance.setMember(this);
+
+		}
+		
+	}
+	
+	public void removeAttendance (Attendance attendance) {
+		this.attendance.remove(attendance);
+		attendance.setMember(null);
 	}
 	
 	

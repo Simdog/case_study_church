@@ -9,15 +9,17 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<spring:url value="/resources/css/casestudy.css" var="mainCss" />
-	<link href="${mainCss}" rel="stylesheet">
+<spring:url value="/resources/css/casestudy1.css" var="mainCss" />
 	<!-- CSS Only -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	<link href="${mainCss}" rel="stylesheet">
 </head>
 <body>
-<h1>Tithe Manager</h1>
+<div class="main-content">
 <%@ include file="navigation_bar.html" %>
-
+<%@ include file="dashboardAdmin.html" %>
+	<div class="container content-wrap" align="center">
+	<h1>Tithe Manager</h1>
 
 
 <form:form action="./tithe" method="post" modelAttribute="tithe">
@@ -41,7 +43,7 @@
 		</div>
 	</form:form>
 	<h3><a href="new">Church Members</a></h3>
-    <table border="1" cellpadding="5">
+    <table class="table table-striped" border="1" cellpadding="5">
         <tr>
             <th>ID</th>
             <th>Last Name</th>
@@ -63,6 +65,11 @@
         </tr>
         </c:forEach>
     </table>
+	
+	</div>
+</div>
+
+
 
 </body>
 </html>

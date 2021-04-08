@@ -10,27 +10,25 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 
 @Entity
 public class Attendance {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-//	@ManyToOne
-	@ManyToOne(targetEntity=ChurchMember.class,fetch = FetchType.LAZY)
-	@JoinTable(name = "member_attendance", joinColumns = {
-@JoinColumn(name = "attendanceId", referencedColumnName = "id") }, inverseJoinColumns = {
-@JoinColumn(name = "memberId", referencedColumnName = "id") })
+
+//	@ManyToOne(targetEntity=ChurchMember.class,fetch = FetchType.LAZY)
+//	@JoinTable(name = "member_attendance", joinColumns = {
+//@JoinColumn(name = "attendanceId", referencedColumnName = "id") }, inverseJoinColumns = {
+//@JoinColumn(name = "memberId", referencedColumnName = "id") })
+	@ManyToOne(fetch = FetchType.LAZY)
 	private ChurchMember member;
+	
 	private boolean isPresent;
 	
 	private String date;
 	
-//	@Temporal(TemporalType.DATE)
-//	private Date dateOfAttendance;
 
 	public Attendance() {
 		
@@ -147,6 +145,8 @@ public class Attendance {
 			return false;
 		return true;
 	}
+
+	
 
 	
 	
