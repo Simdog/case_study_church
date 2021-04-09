@@ -2,6 +2,7 @@ package com.tekglobal.casestudyexample.models;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,7 +45,7 @@ public class UserInfo {
 //	@JoinColumn(name = "id", nullable = false)
 //	@PrimaryKeyJoinColumn
 	
-	@OneToOne(mappedBy = "userInfo")
+	@OneToOne(cascade = CascadeType.ALL,  mappedBy = "userInfo")
 	private ChurchMember member;
 	
 	public UserInfo () {

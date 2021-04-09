@@ -29,11 +29,12 @@
             </tr>
         </table>
 	</div>
-<%@ include file="footer.html" %>
 </div>
 
 
 
 
+
 </body>
+<%@ include file="footer.html" %>
 </html>

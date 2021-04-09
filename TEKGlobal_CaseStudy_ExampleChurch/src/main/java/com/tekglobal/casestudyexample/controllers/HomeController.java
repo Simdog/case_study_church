@@ -2,6 +2,7 @@ package com.tekglobal.casestudyexample.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -50,42 +51,114 @@ public class HomeController {
 
 	@RequestMapping(value ="/register" ,method=RequestMethod.GET)
 	public String showRegisterPage(Model model) {
-		model.addAttribute("user", new User());
-		return "registration";
+		model.addAttribute("userCred", new User());
+		return "signlog";
 	}
 	
 	
 	@RequestMapping(value ="/login" ,method=RequestMethod.GET)
 	public String showLoginPage(Model model) {
 		model.addAttribute("userCred", new User());
-		return "login";
+		return "signlog";
 	}
 	
 	@RequestMapping(value ="/registersuccess" ,method=RequestMethod.POST)
-	public ModelAndView registerNewUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
+	public ModelAndView registerNewUser(@Valid @ModelAttribute("userCred") User user, BindingResult result, HttpServletRequest request) {
+		String uEmail = request.getParameter("email");
+		String uPass = request.getParameter("password");
+		String userName = request.getParameter("username");
+
+		User newU = new User();
+		newU.setEmail(uEmail);
+		newU.setPassword(uPass);
+		newU.setUsername(userName);
+		System.out.println(newU);
 		if (result.hasErrors()) {
-			return new ModelAndView("registration");
+			return new ModelAndView("signlog");
 		}
-		getUserService().saveUser(user);
+		getUserService().saveUser(newU);
 		ModelAndView mav = new ModelAndView("welcome");
-		mav.addObject("user", user);
+		mav.addObject("userCred", user);
 		return mav;
 	}
 	
+    @RequestMapping(value = "/forgotpasswordrequest", method = RequestMethod.GET)
+	public ModelAndView forgotPass (@RequestParam(value = "forgotPassUserName", required = true)String userName,
+			@RequestParam(value = "forgotPassEmail", required = true)String email, Model model) {
+    		
+    	User uName = userService.findUserByUsername(userName);
+    	System.out.println(uName.getEmail());
+    	System.out.println(email);
+    	ModelAndView mav = new ModelAndView("forgot_password");
+    	if (uName.getUsername().equals(userName) && uName.getEmail().equals(email)) {
+    		mav.addObject("userCred", uName);
+    		System.out.println(uName);
+    		return mav;
+    	} 
+    	
+    		return new ModelAndView("notFound");
+    	}
+    		   
+		
+	
+    
+    @RequestMapping(value ="/forgotpassword" ,method=RequestMethod.GET)
+	public String showForgotPage(Model model) {
+		model.addAttribute("userCred", new User());
+		return "forgot_password";
+	}
+	
+//	@RequestMapping(value ="/loginsuccess" ,method=RequestMethod.POST)
+//	public ModelAndView loginSuccess(@Valid @ModelAttribute("userCred") User user,
+//			@RequestParam("email") String email,
+//			@RequestParam("password") String password,
+//			BindingResult bindingResult){
+//		if(bindingResult.hasErrors()){
+//			return new ModelAndView("signlog");
+//		}
+//		ModelAndView mav = new ModelAndView("signlog");
+//		User valEmail = getUserService().findByEmail(email);
+//		User valPass = getUserService().findByPassword(password);
+//		User[] newU = new User[25]; 
+//		if (valEmail!=null && password == valPass.toString()) {
+//			newU[1] = valEmail;
+//			newU[2] = valPass;
+//			mav.addObject("userCred", newU);
+////			mav.addObject(valPass);
+////			mav.addObject(valEmail);
+//			return mav;
+//		}else {
+//			mav = new ModelAndView("notFound");
+//		}
+//		return mav;
+//	
+//	}
+	
 	@RequestMapping(value ="/loginsuccess" ,method=RequestMethod.POST)
 	public ModelAndView loginSuccess(@Valid @ModelAttribute("userCred") User user,
-			@RequestParam("email") String email,
-			@RequestParam("password") String password,
-			BindingResult bindingResult){
+			BindingResult bindingResult, HttpServletRequest request){
 		if(bindingResult.hasErrors()){
-			return new ModelAndView("login");
+			return new ModelAndView("signlog");
 		}
-		ModelAndView mav = new ModelAndView("welcome");
-		User valEmail = getUserService().findByEmail(email);
-		User valPass = getUserService().findByPassword(password);
-		if (valEmail!=null && password.equals(valPass)) {
-			mav.addObject(valPass);
-			mav.addObject(valEmail);
+		ModelAndView mav = new ModelAndView("signlog");
+		String uMail = request.getParameter("email");
+		String uPass = request.getParameter("password");
+
+		User valEmail = getUserService().findByEmail(uMail);
+		System.out.println(uMail);
+		String uEmail = getUserService().findByEmail(uMail).getEmail();
+		System.out.println(uEmail);
+		User newUser = valEmail;
+		System.out.println(newUser);
+
+
+		if (uMail != null) {
+//			User newUser = valEmail;
+			System.out.println(newUser + "if statement");
+//			newU = valEmail;
+//			newU[2] = getUserService().findByPassword(uPass);
+			mav.addObject("userCred", newUser);
+
 			return mav;
 		}else {
 			mav = new ModelAndView("notFound");
@@ -115,7 +188,7 @@ public class HomeController {
 	
 	@GetMapping("/contact")
 	public String showContactPage() {
-		return "contact";
+		return "signlog";
 	}
 	
 	

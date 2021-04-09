@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,12 +16,12 @@
 <%@ include file="navigation_bar.html" %>
 
 	<h1>User Welcome Page</h1>
-	<h2>Welcome ${user.username}</h2>
+	<h2>Welcome ${userCred.username}</h2>
 	<table align="center" border="5px">
 	
 			<tr>
 			<td>User email:</td>
-			<td>${user.email}</td>
+			<td>${userCred.email}</td>
 		</tr>
 
 	</table>
