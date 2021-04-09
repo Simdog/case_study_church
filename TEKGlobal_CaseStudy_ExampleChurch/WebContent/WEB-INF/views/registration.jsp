@@ -15,7 +15,7 @@
 <body>
 	<h1>Registration Page</h1>
 	<div class="jumbotron">
-	<form:form action="./register" method="post" modelAttribute="user">
+	<form:form action="./registersuccess" method="post" modelAttribute="user">
 	<div class="col-sm-2">
 			<label class="form-label">User Name: </label>
 			<form:input type="text" class="form-control" placeholder="Username" path="username"/>

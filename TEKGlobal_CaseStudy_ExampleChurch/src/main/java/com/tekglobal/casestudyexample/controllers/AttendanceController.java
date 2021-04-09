@@ -188,18 +188,24 @@ public class AttendanceController {
 			Attendance attendance = new Attendance();
 			String selected = request.getParameter("churchMemberAttendance" + memberIds[i]);
 
-//			ChurchMember mem[] = new ChurchMember[memberIds.length];
-//			mem[i].getId();
+
 			ChurchMember memId = churchMemberService.get(Long.parseLong(memberIds[i]));
-			attendance.setMember(memId);
-			attendance.setDate(attendanceDate[i]);
+			System.out.println(attendanceDate[i]);
+			
 			boolean newB = false;
 //			System.out.println(memberAttendance[i]);
 			if (selected.equals("1")) {
 				 newB = true;
 			} 
+
+			if (!attendanceDate[i].isBlank()) {
+			attendance.setMember(memId);
+			attendance.setDate(attendanceDate[i]);
 			attendance.setIsPresent(newB);
 
+			} else {
+				continue;
+			}
 
 			attendanceService.save(attendance);
 			

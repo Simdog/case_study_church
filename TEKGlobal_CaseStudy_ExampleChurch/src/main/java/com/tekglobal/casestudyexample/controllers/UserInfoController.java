@@ -1,6 +1,7 @@
 package com.tekglobal.casestudyexample.controllers;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -62,8 +63,12 @@ public class UserInfoController {
 	@RequestMapping(value = "/viewmember", method = RequestMethod.GET)
 	public String getMemberInfo(ModelMap modelMap, Model model) {
 		model.addAttribute("userInfo", new UserInfo());
+
 		List<ChurchMember> listChurchMember = churchMemberService.listAll();
+
 		modelMap.put("listChurchMember", listChurchMember);
+		modelMap.put("newInfo", listChurchMember);
+		
         return "edit_member";
     }
 	
@@ -102,6 +107,24 @@ public class UserInfoController {
 			userInfo.setAddress(address[i]);
 			userInfo.setEmail(email[i]);
 			userInfo.setPhoneNumber(phoneNumber[i]);
+			
+			if (!memberFirstName[i].isBlank() && address[i].isBlank()) {
+				userInfo.setId(newId[i]);
+				userInfo.setLastName(memberLastName[i]);
+				userInfo.setFirstName(memberFirstName[i]);
+				userInfo.setEmail(email[i]);
+				userInfo.setPhoneNumber(phoneNumber[i]);
+				
+			} else if (!address[i].isBlank() && memberFirstName[i].isBlank()) {
+				userInfo.setId(newId[i]);
+				userInfo.setLastName(memberLastName[i]);
+				userInfo.setAddress(address[i]);
+				userInfo.setEmail(email[i]);
+				userInfo.setPhoneNumber(phoneNumber[i]);
+			} else if (address[i].isBlank()) {
+				continue;
+			}
+			
 
 			
 			

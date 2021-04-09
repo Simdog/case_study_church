@@ -20,7 +20,14 @@
 <%@ include file="dashboardAdmin.html" %>
 	<div class="content-wrap">
 		<h1>Index Page</h1>
-		<h2>Hello</h2>
+		<table align="center">
+            <tr>
+                <td><a href="./login">Login</a>
+                </td>
+                <td><a href="./register">Register</a>
+                </td>
+            </tr>
+        </table>
 	</div>
 <%@ include file="footer.html" %>
 </div>

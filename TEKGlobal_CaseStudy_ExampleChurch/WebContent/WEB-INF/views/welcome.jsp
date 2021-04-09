@@ -10,10 +10,18 @@
 	<!-- CSS Only -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 </head>
-<body>
+<body>	
+<%@ include file="navigation_bar.html" %>
+
 	<h1>User Welcome Page</h1>
-	<%@ include file="navigation_bar.html" %>
-	<h2>Welcome ${currentUser.username}</h2>
-	<p> </p>
+	<h2>Welcome ${user.username}</h2>
+	<table align="center" border="5px">
+	
+			<tr>
+			<td>User email:</td>
+			<td>${user.email}</td>
+		</tr>
+
+	</table>
 </body>
 </html>

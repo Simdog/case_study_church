@@ -37,7 +37,7 @@
         <c:forEach items="${listChurchMember}" var="churchMember" varStatus="status">
         <tr>
             <td><input name="churchMemberId" value="${churchMember.id }" readonly="true"  /></td>
-            <td><input name="churchMemberLastName" value="${churchMember.lastName }" readonly="true" path="lastName" /></td>
+            <td><input name="churchMemberLastName" value="${churchMember.lastName }" readonly="true"  /></td>
             <td><input name="churchMemberEmail" value="${churchMember.email }" readonly="true" /></td>
             <td><input name="churchMemberPhoneNumber" value="${churchMember.phoneNumber }" readonly="true" /></td>
 			<td><input name="churchMemberFirstName" value="${churchMember.userInfo.firstName }"  /></td>

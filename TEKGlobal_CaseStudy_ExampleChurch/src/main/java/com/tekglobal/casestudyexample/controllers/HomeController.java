@@ -27,19 +27,87 @@ import com.tekglobal.casestudyexample.services.UserService;
 @Controller
 public class HomeController {
 	
+	@Autowired
 	private UserService userService;
 	private ChurchMemberService churchMemberService;
 	
 	@Autowired
-	public HomeController(UserService userService, ChurchMemberService churchMemberService) {
-		this.userService = userService;
+	public HomeController( ChurchMemberService churchMemberService) {
 		this.churchMemberService = churchMemberService;
+	}
+	
+	public void setUserService(UserService userService) {
+		this.userService= userService;
+	}
+	
+	public UserService getUserService() {
+		return userService;
 	}
 	@GetMapping("/")
 	public String showIndexPage() {
 		return "index";
 	}
 
+	@RequestMapping(value ="/register" ,method=RequestMethod.GET)
+	public String showRegisterPage(Model model) {
+		model.addAttribute("user", new User());
+		return "registration";
+	}
+	
+	
+	@RequestMapping(value ="/login" ,method=RequestMethod.GET)
+	public String showLoginPage(Model model) {
+		model.addAttribute("userCred", new User());
+		return "login";
+	}
+	
+	@RequestMapping(value ="/registersuccess" ,method=RequestMethod.POST)
+	public ModelAndView registerNewUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
+		if (result.hasErrors()) {
+			return new ModelAndView("registration");
+		}
+		getUserService().saveUser(user);
+		ModelAndView mav = new ModelAndView("welcome");
+		mav.addObject("user", user);
+		return mav;
+	}
+	
+	@RequestMapping(value ="/loginsuccess" ,method=RequestMethod.POST)
+	public ModelAndView loginSuccess(@Valid @ModelAttribute("userCred") User user,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			BindingResult bindingResult){
+		if(bindingResult.hasErrors()){
+			return new ModelAndView("login");
+		}
+		ModelAndView mav = new ModelAndView("welcome");
+		User valEmail = getUserService().findByEmail(email);
+		User valPass = getUserService().findByPassword(password);
+		if (valEmail!=null && password.equals(valPass)) {
+			mav.addObject(valPass);
+			mav.addObject(valEmail);
+			return mav;
+		}else {
+			mav = new ModelAndView("notFound");
+		}
+		return mav;
+	
+	}
+
+	
+//	public String processLoginRequest(@RequestParam("username") String username, 
+//			@RequestParam("password") String password, Model model, HttpSession session) {
+//		User user = userService.findUserByUsername(username);
+//		
+//		if (user != null && password.equals(user.getPassword())) {
+//			session.setAttribute("currentUser", user);
+//			System.out.println("Login succeeded.");
+//			return "welcome";
+//		} 
+//		model.addAttribute("loginFailedMessage", "Login Invalid");
+//		return "login";
+//	}
+	
 	@GetMapping("/about")
 	public String showAboutPage() {
 		return "about";
@@ -50,11 +118,7 @@ public class HomeController {
 		return "contact";
 	}
 	
-	@GetMapping("/register")
-	public String showRegisterPage(Model model) {
-		model.addAttribute("user", new User());
-		return "registration";
-	}
+	
 	
 	@GetMapping("/signup")
 	public String showSignUpPage(Model model) {
@@ -120,34 +184,7 @@ public class HomeController {
 //	}
 	
 	
-	@PostMapping("/register")
-	public String registerNewUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
-		if (result.hasErrors()) {
-			return "registration";
-		}
-		userService.saveUser(user);
-		return "redirect:/login";
-	}
-	
-	@GetMapping("/login")
-	public String showLoginPage() {
-		return "login";
-	}
-	
-	@PostMapping("/login")
-	public String processLoginRequest(@RequestParam("username") String username, 
-			@RequestParam("password") String password, Model model, HttpSession session) {
-		User user = userService.findUserByUsername(username);
-		
-		if (user != null && password.equals(user.getPassword())) {
-			session.setAttribute("currentUser", user);
-			System.out.println("Login succeeded.");
-			return "welcome";
-		} 
-		model.addAttribute("loginFailedMessage", "Login Invalid");
-		return "login";
-	}
-	
+
 	
 	
 	

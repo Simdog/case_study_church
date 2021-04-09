@@ -20,6 +20,13 @@ public class UserService {
 		
 	}
 	
+	public User findByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
+	
+	public User findByPassword(String password) {
+		return userRepository.findByPassword(password);
+	}
 	public User findUserByUsername(String username ) {
 		return userRepository.findUserByUsername(username);
 	}

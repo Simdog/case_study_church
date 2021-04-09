@@ -19,6 +19,9 @@ public class UserInfoService {
 	        repo.save(userInfo);
 	    }
 	     
+	 public List<UserInfo> findAll (){
+		return (List<UserInfo>) repo.findAll();
+	 }
 	     
 	    public Optional<UserInfo> get(Long id) {
 	        return repo.findById(id);
