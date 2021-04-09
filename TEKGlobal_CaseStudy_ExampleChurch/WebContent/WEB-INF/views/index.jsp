@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>   
+<%@ taglib
+    prefix="c"
+    uri="http://java.sun.com/jsp/jstl/core" 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,21 +17,26 @@
 	<link href="${mainCss}" rel="stylesheet">
 </head>
 <body>
+<%
+%>
+<c:if test="${statut == 'ADMIN'}">
+...
+</c:if>
+
+
 
 <div class="main-content" align="center" >
 <%@ include file="navigation_bar.html" %>
 
-<%@ include file="dashboardAdmin.html" %>
-	<div class="content-wrap">
-		<h1>Index Page</h1>
-		<table align="center">
-            <tr>
-                <td><a href="./login">Login</a>
-                </td>
-                <td><a href="./register">Register</a>
-                </td>
-            </tr>
-        </table>
+<%@  include file="dashboardAdmin.html" %>
+
+	<div class="content-wrap index">
+		<h1 class="pointer">Index Page</h1>
+		<div>
+			    <p class="displaylog"><a class="logs" href="./login">Login</a></p>
+			    <p class="displayreg"><a class="logs" href="./register">Register</a></p>
+
+		</div>
 	</div>
 </div>
 

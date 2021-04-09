@@ -15,6 +15,10 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 	
+	public UserService() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void saveUser(User user) {
 		userRepository.save(user);
 		

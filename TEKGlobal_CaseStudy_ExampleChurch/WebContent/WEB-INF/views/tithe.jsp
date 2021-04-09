@@ -49,7 +49,7 @@
             <th>Last Name</th>
             <th>E-mail</th>
             <th>Phone Number</th>
-            <th>Action</th>
+
         </tr>
         <c:forEach items="${memberMap}" var="churchMember">
         <tr>
@@ -57,11 +57,7 @@
             <td>${churchMember.lastName}</td>
             <td>${churchMember.email}</td>
             <td>${churchMember.phoneNumber}</td>
-            <td>
-                <a href="edit?id=${churchMember.id}">Edit</a>
-                &nbsp;&nbsp;&nbsp;
-                <a href="delete?id=${churchMember.id}">Delete</a>
-            </td>
+
         </tr>
         </c:forEach>
     </table>

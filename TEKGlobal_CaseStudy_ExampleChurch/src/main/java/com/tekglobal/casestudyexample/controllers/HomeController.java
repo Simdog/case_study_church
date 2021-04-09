@@ -143,23 +143,34 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("signlog");
 		String uMail = request.getParameter("email");
 		String uPass = request.getParameter("password");
+		User valUser = getUserService().findByPassword(uPass);
 
 		User valEmail = getUserService().findByEmail(uMail);
 		System.out.println(uMail);
-		String uEmail = getUserService().findByEmail(uMail).getEmail();
-		System.out.println(uEmail);
+		String newU = user.getPassword();
+		System.out.println(newU);
+		String uEmail = null;
+		try {
+			uEmail = getUserService().findByEmail(uMail).getEmail();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		System.out.println(valEmail+ "valEmail");
+		System.out.println(uMail + "uEmail");
 		User newUser = valEmail;
-		System.out.println(newUser);
-
+		System.out.println(uPass + "uPass");
 
 		if (uMail != null) {
-//			User newUser = valEmail;
-			System.out.println(newUser + "if statement");
-//			newU = valEmail;
-//			newU[2] = getUserService().findByPassword(uPass);
-			mav.addObject("userCred", newUser);
-
+			if (uPass.equals(newU)) {
+					System.out.println(valUser + "if statement");	
+			mav = new ModelAndView("welcome");
+				mav.addObject("userCred", valUser);
 			return mav;
+			} else {
+				return mav;
+			}
+		
+
 		}else {
 			mav = new ModelAndView("notFound");
 		}

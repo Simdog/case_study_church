@@ -3,8 +3,10 @@ package com.tekglobal.casestudyexample.controllers;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.ParseException;
@@ -46,19 +48,20 @@ public class UserInfoController {
 	@RequestMapping("/edit")
     public ModelAndView editChurchMemberForm(@RequestParam Long id) {
         ModelAndView mav = new ModelAndView("profile_page");
-        ChurchMember churchMember = churchMemberService.get(id);
+//        ChurchMember churchMember = churchMemberService.get(id);
+        Optional<UserInfo> userI = userInfoService.get(id);
 //        UserInfo userInfo = userInfoService.get(id);
-        mav.addObject("ChurchMember", churchMember);
+        mav.addObject("ChurchMember", userI);
      
         return mav;
     }
 	
-//	@RequestMapping(value = "/profile/save", method = RequestMethod.GET)
-//	public String userInfoProfile(Model model) {
-//		model.addAttribute("userInfo", new UserInfo());
-//        return "profile_page";
-//    }
-//	
+	@RequestMapping(value = "/profile/save", method = RequestMethod.GET)
+	public String userInfoProfile(Model model) {
+		model.addAttribute("ChurchMember", new UserInfo());
+        return "churchManager";
+    }
+
 	
 	@RequestMapping(value = "/viewmember", method = RequestMethod.GET)
 	public String getMemberInfo(ModelMap modelMap, Model model) {
@@ -108,22 +111,24 @@ public class UserInfoController {
 			userInfo.setEmail(email[i]);
 			userInfo.setPhoneNumber(phoneNumber[i]);
 			
-			if (!memberFirstName[i].isBlank() && address[i].isBlank()) {
-				userInfo.setId(newId[i]);
-				userInfo.setLastName(memberLastName[i]);
-				userInfo.setFirstName(memberFirstName[i]);
-				userInfo.setEmail(email[i]);
-				userInfo.setPhoneNumber(phoneNumber[i]);
-				
-			} else if (!address[i].isBlank() && memberFirstName[i].isBlank()) {
-				userInfo.setId(newId[i]);
-				userInfo.setLastName(memberLastName[i]);
-				userInfo.setAddress(address[i]);
-				userInfo.setEmail(email[i]);
-				userInfo.setPhoneNumber(phoneNumber[i]);
-			} else if (address[i].isBlank()) {
-				continue;
-			}
+			
+			
+//			if (!memberFirstName[i].isBlank() && address[i].isBlank()) {
+//				userInfo.setId(newId[i]);
+//				userInfo.setLastName(memberLastName[i]);
+//				userInfo.setFirstName(memberFirstName[i]);
+//				userInfo.setEmail(email[i]);
+//				userInfo.setPhoneNumber(phoneNumber[i]);
+//				
+//			} else if (!address[i].isBlank() && memberFirstName[i].isBlank()) {
+//				userInfo.setId(newId[i]);
+//				userInfo.setLastName(memberLastName[i]);
+//				userInfo.setAddress(address[i]);
+//				userInfo.setEmail(email[i]);
+//				userInfo.setPhoneNumber(phoneNumber[i]);
+//			} else if (address[i].isBlank()) {
+//				continue;
+//			}
 			
 
 			
@@ -132,19 +137,39 @@ public class UserInfoController {
 			userInfoService.save(userInfo);
 		}
 		
-		return "edit_member";
+		return "redirect:/";
 	}
 	
 	
 	
+//	@RequestMapping(value = "/profile/save", method = RequestMethod.POST)
+//	public String processUserInfoProfile(@ModelAttribute("userInfo") UserInfo userInfo, BindingResult bindingResult) {
+//		
+//		if (bindingResult.hasErrors()) {
+//			return "profile_page";
+//		}
+//		
+//        userInfoService.save(userInfo);
+//        return "redirect:/";
+//    }
+	
 	@RequestMapping(value = "/profile/save", method = RequestMethod.POST)
-	public String processUserInfoProfile(@ModelAttribute("userInfo") UserInfo userInfo, BindingResult bindingResult) {
-		
-		if (bindingResult.hasErrors()) {
+	public String processUserInfoProfile( ModelMap model, UserInfo userInfo, BindingResult result, HttpSession session) {
+//			ChurchMember member = ((ChurchMember) session.getAttribute("ChurchMember"));
+			ChurchMember member = churchMemberService.get(userInfo.getId());
+			String newAdd = userInfo.getAddress();
+			String newFirst = userInfo.getFirstName();
+			System.out.println(member.toString());
+		if (result.hasErrors()) {
+			
 			return "profile_page";
 		}
-		
+		userInfoService.addUserInfo(member.getId(), member.getEmail(), member.getLastName(), member.getPhoneNumber(), newFirst, newAdd, member.getDate(), member);
+		List<UserInfo> list = userInfoService.getUserInfo(member);
+		model.addAttribute("userInfo", list);
         userInfoService.save(userInfo);
         return "redirect:/";
     }
+	
+	
 }

@@ -13,13 +13,18 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 </head>
 <body>
+
+<div class="main-content" align="center"> 
+<%@ include file="navigation_bar.html" %>
+<%@  include file="dashboardAdmin.html" %>
+	<div class="content-wrap">
 	<h1>Profile Page</h1>
-	<div class="jumbotron">
-	<form:form action=".profile/save" method="post" modelAttribute="userInfo">
+	<div >
+	<form:form action="./profile/save" method="post" modelAttribute="ChurchMember">
 	<div class="col-sm-2">
 			<label>Member ID </label>
-			<form:input class="form-control" type="text" path="member.id"/>
-			<form:errors path="member.id"/>
+			<form:input class="form-control" type="text" path="member.id" readonly="true"/>
+			<form:errors path="id"/>
 		</div>
 	<div class="col-sm-2">
 			<label class="form-label">First Name </label>
@@ -51,6 +56,12 @@
 		</div>
 	</form:form>
 	</div>
+	</div>
+	<%@ include file="footer.html" %>
+	
+</div>
+
+	
 	
 </body>
 </html>

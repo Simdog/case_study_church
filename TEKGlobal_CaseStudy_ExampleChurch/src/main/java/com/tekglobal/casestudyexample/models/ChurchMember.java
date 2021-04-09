@@ -46,21 +46,17 @@ public class ChurchMember {
 	
 	
 	
-//	@OneToMany(targetEntity=Tithe.class, fetch=FetchType.EAGER)
-//	private Set<Tithe> tithe;
+
 	
 	@OneToMany(targetEntity=Tithe.class, cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "member")
 	private Set<Tithe> tithe;
 	
-//	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL, 
-//			orphanRemoval = true)
-//	private Set<Tithe> tithe;
-	
+
 	@OneToMany(targetEntity=Attendance.class, cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "member")
 	private Set<Attendance> attendance = new HashSet<>();
 	
 	
-	private ChurchRoles userRole;
+	private ChurchRoles churchRole;
 	
     // I also want to track the date of sign up
     // https://www.thecrazyprogrammer.com/2016/02/how-to-insert-date-and-time-in-mysql-using-java.html
@@ -71,20 +67,13 @@ public class ChurchMember {
 //	@OneToOne(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //	@PrimaryKeyJoinColumn
 	
-	@OneToOne
-	@JoinTable(name="Member_Info" ,
-	          joinColumns = {
-	                  @JoinColumn(name = "Member_FK", referencedColumnName = "id")
-	          },
-	          inverseJoinColumns = {
-	                  @JoinColumn(name = "UserInfo_FK", referencedColumnName = "id", unique = true)
-	          })
+	@OneToOne(cascade = CascadeType.ALL)
 	private UserInfo userInfo;
  
 	
 	public ChurchMember() {
 		this.date = new Date();
-		this.userRole = ChurchRoles.MEMBER;
+		this.churchRole = ChurchRoles.MEMBER;
 	}
 	
 	protected ChurchMember(Long id, String lastName, String email, String phoneNumber) {
@@ -149,11 +138,11 @@ public class ChurchMember {
 	}
 
 	public ChurchRoles getUserRole() {
-		return userRole;
+		return churchRole;
 	}
 
 	public void setUserRole(ChurchRoles userRole) {
-		this.userRole = userRole;
+		this.churchRole = userRole;
 	}
 
 	public Date getDate() {

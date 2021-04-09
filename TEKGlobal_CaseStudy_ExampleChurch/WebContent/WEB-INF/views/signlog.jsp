@@ -66,16 +66,7 @@
 
 	</div>
 	<script type="text/javascript">
-		const signUpButton = ducument.getElementById("signUp");
-		const signInButton = ducument.getElementById("signIn");
-		const container = ducument.getElementById("container");
 		
-		signUpButton.addEventListener("click", () => {
-			container.classList.add("right-panel-active");
-		});
-		signInButton.addEventListener("click", () => {
-			container.classList.remove("right-panel-active");
-		});
 
 	</script>
 

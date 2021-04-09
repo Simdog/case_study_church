@@ -19,6 +19,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@Table(name = "churchmemberinfo")
 public class UserInfo {
 
 	
@@ -60,9 +61,21 @@ public class UserInfo {
 		this.address = address;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
-		dateJoined = new Date();
+		dateJoined = member.getDate();
 	}
 
+
+	public UserInfo(Long id, String email, String firstName, String lastName, String address,
+			String phoneNumber, ChurchMember member) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		dateJoined = member.getDate();
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -138,6 +151,14 @@ public class UserInfo {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return "UserInfo [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", address=" + address + ", phoneNumber=" + phoneNumber + ", dateJoined=" + dateJoined + ", member="
+				+ member + "]";
+	}
+	
 	
 	
 
