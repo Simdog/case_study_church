@@ -11,9 +11,13 @@ Church Manager is a Online Management Application built on Spring MVC, It has a 
 
 
 ```
-AS A pastor/ Church worker I want to manage my church members
-I WANT to create, update and track church members
-SO THAT I can keep and organized data
+## User-Story
+(User = Pastor / Usher)
+- As a User, I would like to log into my account with valid credentials.
+- As a User, I would like to add new church members to my church database.
+- As a User, I would like to keep track of members attendance.
+- As a User, I would like to keep track of members tithe.
+- As a User, I would like to edit and delete member information.
 
 ```
 
@@ -35,7 +39,15 @@ SO THAT I can keep and organized data
 ## Usage
 Church Management Application
 
-## technology
+## Technology 
+- Spring MVC
+- HTML / CSS
+- SQL
+- Core Java
+- JPA
+- jUnit Testing
+- Tomcat Server
+
 
 
 ## Successes
@@ -45,11 +57,12 @@ Create Church Members
 Track Church Members Tithe
 Track Attendance
 
-## challenges
+## Challenges
 One to ones and one to many not generating foreign key
-tracking data based on foreign key
-retreiving data from 2 models
-## futuredevelopment
+Tracking data based on foreign key
+Retreiving data from 2 models
+
+## Future development
 UI for quick access to everyday data
 UI to better store data for long lists of data
 Ability to grab any data linked to a specic church member
