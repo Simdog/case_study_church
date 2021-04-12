@@ -60,7 +60,7 @@ Registering
 ## Challenges
 - One to ones and one to many not generating foreign key
 - Tracking data based on foreign key
-- Retreiving data from 2 models
+- Retreiving data from 2 Models with foreign key
 
 ## Future development
 - UI for quick access to everyday data
