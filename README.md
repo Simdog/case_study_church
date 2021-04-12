@@ -5,7 +5,7 @@
 It has never been more important than it is right now to keep up with the digital growth and to have online organization tools.
 I wanted to create a fast and easy way to organize church database , access information and store information. 
 
-Try it now: https://project-2-mixtape.herokuapp.com/
+
 
 Church Manager is a Online Management Application built on Spring MVC, It has a simple interface for Creating, Reading, Updating, and Deleting church members. I want the user to be solely focused on their members, and so i designed a easy to use, mobile-friendly website for just that. 
 
