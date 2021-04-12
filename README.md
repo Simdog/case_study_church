@@ -1,6 +1,6 @@
 # Church Management App (CMApp) - A Platform to Manage Your Church Members.
 
-[![GitHub license][![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](https://www.contributor-covenant.org/version/2/0/code_of_conduct/code_of_conduct.md)
+
 
 It has never been more important than it is right now to keep up with the digital growth and to have online organization tools.
 I wanted to create a fast and easy way to organize church database , access information and store information. 
