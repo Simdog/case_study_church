@@ -61,11 +61,13 @@ Registering
 - One to ones and one to many not generating foreign key
 - Tracking data based on foreign key
 - Retreiving data from 2 Models with foreign key
+- When refreshing, duplicate entries are returned to the database
 
 ## Future development
 - UI for quick access to everyday data
 - UI to better store data for long lists of data
 - Ability to grab any data linked to a specic church member
+- Secure password with Bcrypt
 
 ## Screenshots
 
