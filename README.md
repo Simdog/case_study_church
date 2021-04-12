@@ -52,20 +52,20 @@ Church Management Application
 
 ## Successes
 Registering 
-I was able to Append data to DB
-Create Church Members
-Track Church Members Tithe
-Track Attendance
+- I was able to Append data to DB
+- Create Church Members
+- Track Church Members Tithe
+- Track Attendance
 
 ## Challenges
-One to ones and one to many not generating foreign key
-Tracking data based on foreign key
-Retreiving data from 2 models
+- One to ones and one to many not generating foreign key
+- Tracking data based on foreign key
+- Retreiving data from 2 models
 
 ## Future development
-UI for quick access to everyday data
-UI to better store data for long lists of data
-Ability to grab any data linked to a specic church member
+- UI for quick access to everyday data
+- UI to better store data for long lists of data
+- Ability to grab any data linked to a specic church member
 
 ## Screenshots
 
